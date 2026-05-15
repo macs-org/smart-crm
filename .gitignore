@@ -1,0 +1,17 @@
+# Local env / credentials
+.env
+.env.*
+!.env.example
+
+# Dependencies / build output
+node_modules/
+.next/
+dist/
+build/
+
+# Vercel local project link
+.vercel/
+
+# OS/editor noise
+.DS_Store
+*.log
