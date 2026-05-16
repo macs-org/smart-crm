@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart CRM — Template</title>
+  <meta name="description" content="A template landing page and dashboard preview for the Smart CRM project." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #08090a;
+      --panel: #0f1011;
+      --surface: rgba(255,255,255,0.035);
+      --surface-strong: rgba(255,255,255,0.06);
+      --border: rgba(255,255,255,0.08);
+      --border-subtle: rgba(255,255,255,0.05);
+      --text: #f7f8f8;
+      --muted: #d0d6e0;
+      --subtle: #8a8f98;
+      --faint: #62666d;
+      --brand: #5e6ad2;
+      --brand-2: #828fff;
+      --good: #10b981;
+      --warn: #f59e0b;
+      --danger: #f87171;
+      color-scheme: dark;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      font-feature-settings: "cv01", "ss03";
+      background:
+        radial-gradient(circle at 18% 12%, rgba(94,106,210,0.18), transparent 28rem),
+        radial-gradient(circle at 78% 10%, rgba(16,185,129,0.10), transparent 24rem),
+        linear-gradient(180deg, #0b0c10 0%, var(--bg) 38%, #050506 100%);
+      color: var(--text);
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 18px 22px;
+      backdrop-filter: blur(18px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 590;
+      letter-spacing: -0.24px;
+    }
+
+    .logo {
+      width: 30px;
+      height: 30px;
+      border-radius: 9px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--brand), #2dd4bf);
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.16) inset, 0 20px 60px rgba(94,106,210,0.28);
+    }
+
+    .logo svg { width: 17px; height: 17px; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 510;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 14px;
+      font-weight: 510;
+      color: var(--muted);
+      background: rgba(255,255,255,0.03);
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.12);
+    }
+
+    .button.primary {
+      color: white;
+      background: linear-gradient(180deg, var(--brand-2), var(--brand));
+      border-color: rgba(255,255,255,0.14);
+      box-shadow: 0 16px 50px rgba(94,106,210,0.32), inset 0 1px 0 rgba(255,255,255,0.20);
+    }
+
+    main { overflow: hidden; }
+
+    .hero {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 82px 22px 52px;
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(360px, 1.05fr);
+      gap: 48px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      margin-bottom: 18px;
+      padding: 7px 11px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.025);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 510;
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--good);
+      box-shadow: 0 0 0 4px rgba(16,185,129,0.12);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(44px, 7vw, 78px);
+      line-height: 0.96;
+      letter-spacing: -1.58px;
+      font-weight: 510;
+    }
+
+    .hero p {
+      max-width: 610px;
+      margin: 22px 0 0;
+      color: var(--subtle);
+      font-size: 18px;
+      line-height: 1.65;
+      letter-spacing: -0.165px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 34px;
+      max-width: 590px;
+    }
+
+    .metric {
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.025);
+      padding: 15px;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 22px;
+      letter-spacing: -0.4px;
+      font-weight: 590;
+    }
+
+    .metric span {
+      display: block;
+      margin-top: 4px;
+      color: var(--faint);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .dashboard-shell {
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.025));
+      box-shadow: 0 40px 120px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.08);
+      padding: 12px;
+      transform: none;
+    }
+
+    .dashboard {
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      border-radius: 15px;
+      background: #0d0e10;
+    }
+
+    .dash-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border-subtle);
+      background: rgba(255,255,255,0.025);
+    }
+
+    .traffic { display: flex; gap: 6px; }
+    .traffic span { width: 10px; height: 10px; border-radius: 999px; background: #34343a; }
+    .traffic span:nth-child(1) { background: #f87171; }
+    .traffic span:nth-child(2) { background: #f59e0b; }
+    .traffic span:nth-child(3) { background: #10b981; }
+
+    .command {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      color: var(--faint);
+      font-size: 12px;
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      padding: 5px 9px;
+      background: rgba(0,0,0,0.24);
+    }
+
+    .dash-body {
+      display: grid;
+      grid-template-columns: minmax(138px, 0.34fr) minmax(0, 1fr);
+      min-height: 458px;
+    }
+
+    .sidebar {
+      border-right: 1px solid var(--border-subtle);
+      padding: 16px 12px;
+      background: rgba(255,255,255,0.018);
+    }
+
+    .side-label {
+      padding: 8px 10px;
+      color: var(--faint);
+      font-size: 11px;
+      font-weight: 510;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .side-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 4px 0;
+      padding: 10px;
+      border-radius: 9px;
+      color: var(--subtle);
+      font-size: 13px;
+      font-weight: 510;
+    }
+
+    .side-item.active {
+      color: var(--text);
+      background: rgba(94,106,210,0.14);
+      box-shadow: inset 0 0 0 1px rgba(130,143,255,0.18);
+    }
+
+    .count {
+      color: var(--faint);
+      font-size: 11px;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+    }
+
+    .workspace { padding: 18px; min-width: 0; }
+
+    .workspace-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+
+    .workspace h2 {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: -0.28px;
+      font-weight: 590;
+    }
+
+    .workspace small {
+      display: block;
+      margin-top: 6px;
+      color: var(--faint);
+    }
+
+    .pipeline {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .stage {
+      min-height: 112px;
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 12px;
+      background: rgba(255,255,255,0.022);
+    }
+
+    .stage-title {
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 590;
+      margin-bottom: 10px;
+    }
+
+    .lead-card {
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 10px;
+      background: rgba(255,255,255,0.035);
+      margin-top: 8px;
+    }
+
+    .lead-card strong { display: block; font-size: 13px; font-weight: 590; }
+    .lead-card span { display: block; margin-top: 4px; color: var(--faint); font-size: 11px; }
+
+    .insights {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 10px;
+    }
+
+    .panel {
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      background: rgba(255,255,255,0.022);
+      padding: 14px;
+    }
+
+    .panel-title { color: var(--muted); font-size: 13px; font-weight: 590; margin-bottom: 12px; }
+    .bar { height: 8px; border-radius: 999px; background: rgba(255,255,255,0.06); overflow: hidden; margin: 10px 0; }
+    .bar i { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--brand), #2dd4bf); }
+
+    .activity { display: grid; gap: 10px; }
+    .activity-row { display: flex; align-items: center; gap: 9px; color: var(--subtle); font-size: 12px; }
+    .status-dot { width: 8px; height: 8px; border-radius: 999px; background: var(--brand-2); }
+    .status-dot.good { background: var(--good); }
+    .status-dot.warn { background: var(--warn); }
+
+    .section {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 74px 22px;
+    }
+
+    .section-head { max-width: 690px; margin-bottom: 28px; }
+    .section-head h2 { margin: 0; font-size: clamp(30px, 4vw, 48px); line-height: 1; letter-spacing: -1.056px; font-weight: 510; }
+    .section-head p { margin: 14px 0 0; color: var(--subtle); line-height: 1.65; font-size: 16px; }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .feature {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      background: rgba(255,255,255,0.025);
+      min-height: 190px;
+    }
+
+    .feature-icon {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: rgba(94,106,210,0.13);
+      color: var(--brand-2);
+      margin-bottom: 30px;
+    }
+
+    .feature h3 { margin: 0; font-size: 18px; font-weight: 590; letter-spacing: -0.2px; }
+    .feature p { margin: 10px 0 0; color: var(--subtle); font-size: 14px; line-height: 1.65; }
+
+    .footer {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 36px 22px 54px;
+      color: var(--faint);
+      border-top: 1px solid var(--border-subtle);
+      font-size: 13px;
+    }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; padding-top: 50px; }
+      .dashboard-shell { transform: none; }
+      .feature-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 680px) {
+      .nav-links { display: none; }
+      .metrics, .pipeline, .insights { grid-template-columns: 1fr; }
+      .dash-body { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .hero { padding-bottom: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a href="#" class="brand" aria-label="Smart CRM home">
+      <span class="logo" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M6 14.5 10.5 19 19 7" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      Smart CRM
+    </a>
+    <div class="nav-links">
+      <a href="#pipeline">Pipeline</a>
+      <a href="#automation">Automation</a>
+      <a href="#template">Template</a>
+    </div>
+    <a class="button" href="#template">Preview roadmap</a>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div>
+        <div class="eyebrow"><span class="dot"></span> Template build · Emily's Lab</div>
+        <h1>Relationship intelligence for high-signal follow up.</h1>
+        <p>Smart CRM is a lightweight template for tracking leads, customers, conversations, and next actions — designed for agent-assisted workflows from day one.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#pipeline">View dashboard preview</a>
+          <a class="button" href="#automation">Explore automations</a>
+        </div>
+        <div class="metrics" aria-label="Template metrics">
+          <div class="metric"><strong>42</strong><span>sample accounts organized by priority</span></div>
+          <div class="metric"><strong>17</strong><span>follow-ups queued for this week</span></div>
+          <div class="metric"><strong>3.4x</strong><span>mock pipeline velocity improvement</span></div>
+        </div>
+      </div>
+
+      <div class="dashboard-shell" id="pipeline">
+        <div class="dashboard">
+          <div class="dash-top">
+            <div class="traffic"><span></span><span></span><span></span></div>
+            <div class="command">⌘ K · ask the CRM</div>
+          </div>
+          <div class="dash-body">
+            <aside class="sidebar">
+              <div class="side-label">Workspace</div>
+              <div class="side-item active">Pipeline <span class="count">42</span></div>
+              <div class="side-item">Accounts <span class="count">128</span></div>
+              <div class="side-item">Tasks <span class="count">17</span></div>
+              <div class="side-item">Signals <span class="count">09</span></div>
+              <div class="side-label">Views</div>
+              <div class="side-item">Hot leads</div>
+              <div class="side-item">Needs reply</div>
+              <div class="side-item">Dormant</div>
+            </aside>
+            <section class="workspace">
+              <div class="workspace-head">
+                <div>
+                  <h2>Revenue pipeline</h2>
+                  <small>Template data · replace with real contacts later</small>
+                </div>
+                <a class="button" href="#">Add lead</a>
+              </div>
+              <div class="pipeline">
+                <div class="stage">
+                  <div class="stage-title">New signal <span>$18k</span></div>
+                  <div class="lead-card"><strong>Atlas Ops</strong><span>Website visit · pricing page</span></div>
+                  <div class="lead-card"><strong>Northstar AI</strong><span>Inbound from Discord</span></div>
+                </div>
+                <div class="stage">
+                  <div class="stage-title">Active convo <span>$46k</span></div>
+                  <div class="lead-card"><strong>Bluebird Labs</strong><span>Demo follow-up due today</span></div>
+                  <div class="lead-card"><strong>GrainWorks</strong><span>Waiting on data room</span></div>
+                </div>
+                <div class="stage">
+                  <div class="stage-title">Proposal <span>$72k</span></div>
+                  <div class="lead-card"><strong>Forge Capital</strong><span>Decision maker engaged</span></div>
+                  <div class="lead-card"><strong>SignalCo</strong><span>Legal review</span></div>
+                </div>
+              </div>
+              <div class="insights">
+                <div class="panel">
+                  <div class="panel-title">Agent recommendations</div>
+                  <div class="activity-row"><span class="status-dot good"></span> Draft a short follow-up for Bluebird Labs.</div>
+                  <div class="activity-row"><span class="status-dot"></span> Promote Atlas Ops to active convo if they revisit.</div>
+                  <div class="activity-row"><span class="status-dot warn"></span> Ask Forge Capital for procurement timeline.</div>
+                </div>
+                <div class="panel">
+                  <div class="panel-title">Health score</div>
+                  <small style="color: var(--faint)">Pipeline freshness</small><div class="bar"><i style="width: 82%"></i></div>
+                  <small style="color: var(--faint)">Reply coverage</small><div class="bar"><i style="width: 64%"></i></div>
+                  <small style="color: var(--faint)">Decision-maker map</small><div class="bar"><i style="width: 51%"></i></div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="automation">
+      <div class="section-head">
+        <h2>Built for a CRM that agents can actually use.</h2>
+        <p>This template sets the visual direction and information architecture before we wire in real data, auth, database storage, and Vercel deployment automation.</p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature">
+          <div class="feature-icon">↗</div>
+          <h3>Lead signal capture</h3>
+          <p>Track inbound messages, page visits, form fills, and manual notes as structured relationship signals.</p>
+        </article>
+        <article class="feature">
+          <div class="feature-icon">⌘</div>
+          <h3>Agent command center</h3>
+          <p>Ask the CRM for next steps, stale deals, account summaries, and suggested replies from one command bar.</p>
+        </article>
+        <article class="feature">
+          <div class="feature-icon">✓</div>
+          <h3>Follow-up operating loop</h3>
+          <p>Convert relationship context into tasks, reminders, proposals, and measurable pipeline movement.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="template">
+      <div class="section-head">
+        <h2>Next build steps.</h2>
+        <p>After this template, the practical path is: choose auth, define the account/contact schema, wire persistence, then deploy the real app on Vercel from this subdirectory.</p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature"><div class="feature-icon">1</div><h3>Scaffold app</h3><p>Move from static template to Next.js with reusable dashboard components.</p></article>
+        <article class="feature"><div class="feature-icon">2</div><h3>Add data model</h3><p>Accounts, contacts, conversations, tasks, events, and AI-generated recommendations.</p></article>
+        <article class="feature"><div class="feature-icon">3</div><h3>Ship to Vercel</h3><p>Use the existing Vercel token/scope setup for preview and production deployments.</p></article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    Smart CRM template · `apps/smart-crm` · generated for Emily's Lab
+  </footer>
+</body>
+</html>
